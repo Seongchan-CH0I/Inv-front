@@ -39,8 +39,8 @@
         ]
     },
     "devDependencies": {
+        "@emotion/eslint-plugin": "^11.12.0",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-emotion": "^11.0.0",
         "eslint-plugin-prettier": "^5.5.4",
         "prettier": "^3.6.2"
     }
