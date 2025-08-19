@@ -1,0 +1,13 @@
+.app-container {
+  max-width: 400px; /* 스마트폰 너비와 유사하게 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 20px; /* 내용과 가장자리 사이에 여백 추가 */
+  min-height: 100vh; /* 최소 높이를 뷰포트 전체 높이로 설정하여 스크롤 가능성 확보 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 시각적인 구분을 위한 그림자 */
+  background-color: #fff; /* 배경색 */
+}
+
+body {
+  margin: 0;
+  background-color: #f0f2f5; 
+}
