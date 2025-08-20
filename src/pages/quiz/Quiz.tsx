@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Question from './components/Question';
 import QuizResult from './components/QuizResult';
+import './Quiz.css';
+import {
+    QuizData,
+    QuizSubmissionRequest,
+    QuizSubmissionResponse,
+} from '../../types/quiz';
 
-// 데이터 타입 정의
-interface QuizData {
-    id: number;
-    questionText: string;
-    answers: {
-        id: number;
-        answerText: string;
-        score: number;
-    }[];
-}
-
-interface QuizSubmissionRequest {
-    answers: { [questionId: number]: number };
-}
-
-interface QuizSubmissionResponse {
-    totalScore: number;
-    result: string;
-}
-
-// 부모(App)로부터 받을 Props 타입
 interface QuizProps {
     onQuizComplete: () => void;
 }
 
 function Quiz({ onQuizComplete }: QuizProps) {
-    // 상태 관리
     const [quizzes, setQuizzes] = useState<QuizData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -41,7 +25,6 @@ function Quiz({ onQuizComplete }: QuizProps) {
     );
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    // 데이터 로딩
     useEffect(() => {
         const fetchQuizData = async () => {
             setLoading(true);
@@ -51,7 +34,7 @@ function Quiz({ onQuizComplete }: QuizProps) {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
+                const data: QuizData[] = await response.json();
                 setQuizzes(data);
             } catch (err: any) {
                 setError(err.message);
@@ -62,12 +45,13 @@ function Quiz({ onQuizComplete }: QuizProps) {
         fetchQuizData();
     }, []);
 
-    // 이벤트 핸들러
     const handleAnswerSelection = (
         quizId: number,
         selectedAnswerScore: number,
     ) => {
-        setUserAnswers((prev) => new Map(prev).set(quizId, selectedAnswerScore));
+        setUserAnswers((prev) =>
+            new Map(prev).set(quizId, selectedAnswerScore),
+        );
         setTimeout(() => {
             setCurrentQuizIndex((prevIndex) => prevIndex + 1);
         }, 300);
@@ -108,7 +92,6 @@ function Quiz({ onQuizComplete }: QuizProps) {
         }
     };
 
-    // 렌더링 로직
     if (loading) return <div>퀴즈를 불러오는 중...</div>;
     if (error) return <div>에러 발생: {error}</div>;
     if (quizzes.length === 0) return <div>퀴즈가 없습니다.</div>;
@@ -122,6 +105,8 @@ function Quiz({ onQuizComplete }: QuizProps) {
                     <QuizResult result={quizResult} onGoHome={onQuizComplete} />
                 ) : (
                     <div>
+                        {' '}
+                        {/* className="quiz-content-wrapper" 제거 */}
                         <h1>결과 보기</h1>
                         <p>결과를 보려면 아래 버튼을 눌러주세요.</p>
                         <button onClick={handleSubmitQuiz} disabled={loading}>

@@ -1,20 +1,8 @@
 import React from 'react';
-
-// 이 컴포넌트에서 사용할 데이터 타입 정의
-interface Answer {
-    id: number;
-    answerText: string;
-    score: number;
-}
-
-interface QuestionData {
-    id: number;
-    questionText: string;
-    answers: Answer[];
-}
+import { Answer, QuizData } from '../../../types/quiz'; // 타입 임포트
 
 interface QuestionProps {
-    question: QuestionData;
+    question: QuizData;
     questionNumber: number;
     userAnswer: number | undefined;
     onAnswerSelect: (questionId: number, score: number) => void;
@@ -28,6 +16,8 @@ function Question({
 }: QuestionProps) {
     return (
         <div>
+            {' '}
+            {/* className="quiz-content-wrapper" 제거 */}
             <h1>퀴즈</h1>
             <form>
                 <div key={question.id}>
