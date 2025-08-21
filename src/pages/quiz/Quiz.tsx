@@ -7,12 +7,11 @@ import {
     QuizSubmissionRequest,
     QuizSubmissionResponse,
 } from '../../types/quiz';
+import { useNavigate } from 'react-router-dom';
 
-interface QuizProps {
-    onQuizComplete: () => void;
-}
+function Quiz() {
+    const navigate = useNavigate();
 
-function Quiz({ onQuizComplete }: QuizProps) {
     const [quizzes, setQuizzes] = useState<QuizData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -102,11 +101,12 @@ function Quiz({ onQuizComplete }: QuizProps) {
         <div>
             {isQuizFinished ? (
                 isSubmitted && quizResult ? (
-                    <QuizResult result={quizResult} onGoHome={onQuizComplete} />
+                    <QuizResult
+                        result={quizResult}
+                        onGoHome={() => navigate('/home')}
+                    />
                 ) : (
                     <div>
-                        {' '}
-                        {/* className="quiz-content-wrapper" 제거 */}
                         <h1>결과 보기</h1>
                         <p>결과를 보려면 아래 버튼을 눌러주세요.</p>
                         <button onClick={handleSubmitQuiz} disabled={loading}>
@@ -115,12 +115,16 @@ function Quiz({ onQuizComplete }: QuizProps) {
                     </div>
                 )
             ) : (
-                <Question
-                    question={quizzes[currentQuizIndex]}
-                    questionNumber={currentQuizIndex + 1}
-                    userAnswer={userAnswers.get(quizzes[currentQuizIndex].id)}
-                    onAnswerSelect={handleAnswerSelection}
-                />
+                <div>
+                    <Question
+                        question={quizzes[currentQuizIndex]}
+                        questionNumber={currentQuizIndex + 1}
+                        userAnswer={userAnswers.get(
+                            quizzes[currentQuizIndex].id,
+                        )}
+                        onAnswerSelect={handleAnswerSelection}
+                    />
+                </div>
             )}
         </div>
     );

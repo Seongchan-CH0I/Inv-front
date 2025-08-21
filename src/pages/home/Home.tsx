@@ -5,6 +5,8 @@ import LearningCard from './components/LearningCard';
 import MarketCard from './components/MarketCard';
 import { HomeDashboardDTO } from '../../types/dashboard';
 
+import { Link } from 'react-router-dom';
+
 function Home() {
     const [dashboardData, setDashboardData] = useState<HomeDashboardDTO | null>(
         null,
@@ -46,9 +48,15 @@ function Home() {
     return (
         <div>
             <h1>My Dashboard</h1>
-            <DailyMissionCard mission={dashboardData.dailyMissionPreview} />
-            <LearningCard learning={dashboardData.learningPreview} />
-            <MarketCard market={dashboardData.marketPreview} />
+            <Link to="/home">
+                <DailyMissionCard mission={dashboardData.dailyMissionPreview} />
+            </Link>
+            <Link to="/learning">
+                <LearningCard learning={dashboardData.learningPreview} />
+            </Link>
+            <Link to="/market">
+                <MarketCard market={dashboardData.marketPreview} />
+            </Link>
         </div>
     );
 }

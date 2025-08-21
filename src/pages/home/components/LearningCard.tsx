@@ -7,10 +7,7 @@ interface LearningCardProps {
 
 function LearningCard({ learning }: LearningCardProps) {
     return (
-        <div
-            className="dashboard-card"
-            onClick={() => (window.location.href = learning.learningUrl)}
-        >
+        <div className="dashboard-card">
             <h2>학습</h2>
             <h3>{learning.title}</h3>
             <ul>

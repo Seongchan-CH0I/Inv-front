@@ -11,10 +11,7 @@ function MarketCard({ market }: MarketCardProps) {
     };
 
     return (
-        <div
-            className="dashboard-card"
-            onClick={() => (window.location.href = market.marketUrl)}
-        >
+        <div className="dashboard-card">
             <h2>마켓</h2>
             <p>상태: {market.marketStatus}</p>
             <h3>{market.marketIndexName}</h3>
