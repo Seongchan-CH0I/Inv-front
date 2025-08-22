@@ -1,0 +1,13 @@
+
+
+.roadmap-block .user-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.roadmap-block .tier-blocks-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
