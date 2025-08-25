@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import TierBlock from './TierBlock';
 import './LearningRoadmapBlock.css';
-
-interface UserRoadmapInfo {
-    title: string;
-    tier: string;
-}
+import { useUserInfo } from '../../../hooks/useUserInfo';
 
 const LearningRoadmapBlock: React.FC = () => {
-    const [userInfo, setUserInfo] = useState<UserRoadmapInfo | null>(null);
     const navigate = useNavigate();
+    const { data: userInfo, isLoading, error } = useUserInfo();
 
-    useEffect(() => {
-        const fetchUserInfo = () => {
-            const mockData: UserRoadmapInfo = {
-                // todo: 유저의 실제 타이틀과 티어 불러와야 함
-                title: '농부',
-                tier: '밭을 일구는 자',
-            };
-            setUserInfo(mockData);
-        };
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
-        fetchUserInfo();
-    }, []);
+    if (error) {
+        return <div>사용자 정보를 불러오는 데 실패했습니다.</div>;
+    }
 
     const allTiers: { [key: string]: string[] } = {
         농부: ['밭을 일구는 자', '씨앗을 감별하는 자', '대지를 이해하는 자'],
@@ -32,7 +23,7 @@ const LearningRoadmapBlock: React.FC = () => {
     };
 
     const tierPaths: { [key: string]: string } = {
-        '밭을 일구는 자': '/learning/pages/farmer/cultivator',
+        '밭을 일구는 자': '/learning/pages/farmer/cultivator/cultivator1',
         '씨앗을 감별하는 자': '/learning/pages/farmer/seed-identifier',
         '대지를 이해하는 자': '/learning/pages/farmer/land-understander',
         '사냥꾼 티어 1': '/learning/pages/hunter/HunterPage',
@@ -53,7 +44,7 @@ const LearningRoadmapBlock: React.FC = () => {
     };
 
     if (!userInfo) {
-        return <div>Loading...</div>;
+        return <div>사용자 정보가 없습니다.</div>;
     }
 
     const currentTitleTiers = allTiers[userInfo.title] || [];

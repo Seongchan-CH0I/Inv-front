@@ -10,7 +10,8 @@ import Home from './pages/home/Home';
 import LearningDashboardPage from './pages/learning/LearningDashboardPage';
 
 import KnowledgeLibraryPage from './pages/learning/pages/KnowledgeLibraryPage';
-import Cultivator from './pages/learning/pages/farmer/cultivator';
+import Cultivator1 from './pages/learning/pages/farmer/cultivator/cultivator1';
+import Cultivator2 from './pages/learning/pages/farmer/cultivator/cultivator2';
 import SeedIdentifier from './pages/learning/pages/farmer/seed-identifier';
 import LandUnderstander from './pages/learning/pages/farmer/land-understander';
 import HunterPage from './pages/learning/pages/hunter/HunterPage';
@@ -47,8 +48,12 @@ function App() {
                         element={<KnowledgeLibraryPage />}
                     />
                     <Route
-                        path="/learning/pages/farmer/cultivator"
-                        element={<Cultivator />}
+                        path="/learning/pages/farmer/cultivator/cultivator1"
+                        element={<Cultivator1 />}
+                    />
+                    <Route
+                        path="/learning/pages/farmer/cultivator/cultivator2"
+                        element={<Cultivator2 />}
                     />
                     <Route
                         path="/learning/pages/farmer/seed-identifier"
